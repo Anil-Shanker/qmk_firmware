@@ -28,9 +28,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LCTL, ALT_T(KC_A),    LGUI_T(KC_R), LSFT_T(KC_S), LCTL_T(KC_T), KC_G,                KC_M,    RCTL_T(KC_N), RSFT_T(KC_E), RGUI_T(KC_I), ALT_T(KC_O),    KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     OSM(MOD_LSFT), KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    QK_BOOT,             KC_END,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, OSM(MOD_RSFT),
+     OSM(MOD_LSFT), KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    OSL(_LEFT_SYMBOLS),             KC_END,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, OSM(MOD_RSFT),
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI, OSL(_LEFT_SYMBOLS), LT(_LEFT_THUMB, KC_ENT), LT(_RIGHT_THUMB, KC_SPC), MO(_RIGHT_SYMBOLS), KC_RALT
+                                    QK_BOOT, OSL(_LEFT_SYMBOLS), LT(_LEFT_THUMB, KC_ENT), LT(_RIGHT_THUMB, KC_SPC), MO(_RIGHT_SYMBOLS), KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
