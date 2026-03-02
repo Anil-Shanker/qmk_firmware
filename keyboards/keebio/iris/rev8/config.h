@@ -18,4 +18,4 @@
 #define I2C1_SCL_PIN GP11
 
 
-// #define PERMISSIVE_HOLD
+#define PERMISSIVE_HOLD
