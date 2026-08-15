@@ -15,7 +15,7 @@ enum custom_layers {
     _SYMBOLS,
     _LEFT_THUMB,
     _RIGHT_THUMB,
-	_NUMBERS
+    _PLAIN
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OSM(MOD_LSFT), KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    OSL(_SYMBOLS),             OSL(_SYMBOLS),  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, OSM(MOD_RSFT),
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    QK_BOOT, OSL(_NUMBERS), LT(_LEFT_THUMB, KC_ENT), LT(_RIGHT_THUMB, KC_SPC), OSL(_NUMBERS), KC_RALT
+                                QK_BOOT, TG(_PLAIN), LT(_LEFT_THUMB, KC_ENT), LT(_RIGHT_THUMB, KC_SPC), TG(_PLAIN), KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -76,20 +76,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  [_NUMBERS] = LAYOUT(
+[_PLAIN] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, KC_7,    KC_1,    _______,                            _______, KC_2,    KC_8,    _______, _______, _______,
+     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, KC_9,    KC_3,    _______,                            _______, KC_4,    KC_0,    _______, _______, _______,
+     KC_LCTL, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                               KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, KC_5,    _______, _______,          _______, _______, KC_6,    _______, _______, _______, _______,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                    _______, _______, _______
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
+     OSM(MOD_LSFT), KC_Z, KC_X, KC_C, KC_D, KC_V, OSL(_SYMBOLS),             OSL(_SYMBOLS), KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, OSM(MOD_RSFT),
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴────┴────┴────────┴────────┴────────┘
+                                    QK_BOOT, TG(_PLAIN), KC_ENT, LT(_RIGHT_THUMB, KC_SPC), TG(_PLAIN), KC_RALT
+  // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+),
 };
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case _BASE:
+            rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+            rgb_matrix_set_color_all(255, 255, 255);
+            break;
+
+        case _PLAIN:
+            rgb_matrix_mode(RGB_MATRIX_RAINBOW_MOVING_CHEVRON);
+            break;
+    }
+
+    return state;
+}
 
 #ifdef OTHER_KEYMAP_C
 #    include OTHER_KEYMAP_C
